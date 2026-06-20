@@ -1,7 +1,7 @@
 <h1 align="center">
   <img src="https://drive.google.com/uc?export=view&id=1ntXR2BTU2xFzNQN7PFgiHXkAFD6--yOC" alt="" width="100%" border="0" />
 <br>
-# Daily Expense & Income Diary
+Daily Expense & Income Diary
 
 </h1>
 
