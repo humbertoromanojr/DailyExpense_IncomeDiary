@@ -1,6 +1,21 @@
+import React, { useState } from "react";
+import uniquid from "uniqid";
 import { Typography, Button, Checkbox, Form, Input } from "antd";
 
 export default function Add() {
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [value, setValue] = useState();
+
+  function addItem() {
+    var add = {
+      id: uniquid(),
+      name: name,
+      description: description,
+      value: value,
+    };
+  }
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -27,6 +42,10 @@ export default function Add() {
           rules={[
             { required: true, message: "Please input your Product Name!" },
           ]}
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
         >
           <Input />
         </Form.Item>
@@ -37,6 +56,10 @@ export default function Add() {
           rules={[
             { required: false, message: "Please input your Description!" },
           ]}
+          value={description}
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
         >
           <Input />
         </Form.Item>
@@ -45,6 +68,10 @@ export default function Add() {
           label="Value"
           name="Value"
           rules={[{ required: true, message: "Please input your Value!" }]}
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
         >
           <Input />
         </Form.Item>
