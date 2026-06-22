@@ -1,19 +1,35 @@
 import React, { useState } from "react";
 import uniquid from "uniqid";
 import { Typography, Button, Checkbox, Form, Input } from "antd";
+import axios from "axios";
 
-export default function Add() {
+export default function AddItem() {
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [value, setValue] = useState();
 
-  function addItem() {
-    var add = {
+  async function addNewItem() {
+    var addItem = {
       id: uniquid(),
       name: name,
       description: description,
       value: value,
     };
+    console.log("Test Add: ", addItem);
+
+    await axios
+      .post("/api/add/additem", addItem)
+      .then((res) => {
+        // clean fields
+        setName("");
+        setDescription("");
+        setValue("");
+
+        alert(res.data);
+      })
+      .then((err) => {
+        console.log(err);
+      });
   }
 
   const onFinish = (values) => {
@@ -25,7 +41,7 @@ export default function Add() {
 
   return (
     <div>
-      <Typography.Title level={4}>Add Expense</Typography.Title>
+      <Typography.Title level={4}>Add Expenses or Incomes</Typography.Title>
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -77,7 +93,7 @@ export default function Add() {
         </Form.Item>
 
         <Form.Item label={null}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" onClick={addNewItem}>
             Register
           </Button>
         </Form.Item>
