@@ -15,9 +15,11 @@
 }
 
 .SideMenu {
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .Content {
+  padding-left: 15px;
 }
 
 .Footer {
@@ -32,4 +34,6 @@
 .SideMenuAndContent {
   display: flex;
   flex: 1;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
