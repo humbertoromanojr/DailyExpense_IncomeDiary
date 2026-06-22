@@ -27,6 +27,9 @@ Daily Expense & Income Diary
 - [React](https://react.dev/)
 - [React Router](https://github.com/remix-run/react-router#readme)
 - [Ant Design](https://ant.design/docs/react/introduce)
+- [Uniqid](https://github.com/adamhalasz/uniqid/tree/master)
+- [Axios](https://github.com/axios/axios)
+- [Body Parser](https://github.com/expressjs/body-parser)
 
 ## Backend
 
