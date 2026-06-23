@@ -6,9 +6,33 @@ import axios from "axios";
 export default function EditItem() {
   const params = useParams();
 
+  const [form] = Form.useForm();
+
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [value, setValue] = useState();
+
+  useEffect(() => {
+    axios
+      .post("/api/item/edititem", { iditem: params.iditem })
+      .then((res) => {
+        console.log(res.data.data[0]);
+        const dataItem = res.data.data[0];
+
+        setName(dataItem.name);
+        setDescription(dataItem.description);
+        setValue(dataItem.value);
+
+        form.setFieldsValue({
+          Name: dataItem.name,
+          Description: dataItem.description,
+          Value: dataItem.value,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -17,22 +41,34 @@ export default function EditItem() {
     console.log("Failed:", errorInfo);
   };
 
-  useEffect(() => {
-    axios
-      .post("api/item/edititem", { iditem: params.iditem })
-      .then((res) => {
-        console.log(res.data.data[0]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // edit item
+  async function editCurrentItem() {
+    const formValues = form.getFieldsValue();
+
+    const editItem = {
+      id: params.iditem,
+      name: formValues.Name,
+      description: formValues.Description,
+      value: formValues.Value,
+    };
+
+    console.log("Test Edit: ", editItem);
+
+    try {
+      const res = await axios.post("/api/item/updateitem", editItem);
+      console.log("Resposta:", res.data);
+      console.log("Item atualizado com sucesso!");
+    } catch (err) {
+      console.error("Erro ao atualizar:", err);
+    }
+  }
 
   return (
     <div>
       <Typography.Title level={4}>Edit items</Typography.Title>
 
       <Form
+        form={form}
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
@@ -48,6 +84,10 @@ export default function EditItem() {
           rules={[
             { required: true, message: "Please input your Product Name!" },
           ]}
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
         >
           <Input />
         </Form.Item>
@@ -58,6 +98,10 @@ export default function EditItem() {
           rules={[
             { required: false, message: "Please input your Description!" },
           ]}
+          value={description}
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
         >
           <Input />
         </Form.Item>
@@ -66,13 +110,17 @@ export default function EditItem() {
           label="Value"
           name="Value"
           rules={[{ required: true, message: "Please input your Value!" }]}
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
         >
           <Input />
         </Form.Item>
 
         <Form.Item label={null}>
-          <Button type="primary" htmlType="submit">
-            Edit
+          <Button type="primary" htmlType="submit" onClick={editCurrentItem}>
+            Edit item
           </Button>
         </Form.Item>
       </Form>

@@ -62,3 +62,56 @@ router.get("/myList", async (req, res) => {
     });
   }
 });
+
+router.post("/edititem", async (req, res) => {
+  try {
+    const docs = await ModelItems.find({ _id: req.body.iditem });
+
+    res.json({
+      success: true,
+      count: docs.length,
+      data: docs,
+    });
+  } catch (err) {
+    console.error("Erro ao buscar itens:", err);
+    res.status(500).json({
+      success: false,
+      error: "Item NOT find successfully",
+      message: err.message,
+    });
+  }
+});
+
+router.post("/updateitem", async (req, res) => {
+  try {
+    const docs = await ModelItems.findOneAndUpdate(
+      { _id: req.body.id },
+      {
+        name: req.body.name,
+        description: req.body.description,
+        value: req.body.value,
+      },
+      { new: true },
+    );
+
+    if (!docs) {
+      return res.status(404).json({
+        success: false,
+        error: "Item não encontrado",
+        data: null,
+      });
+    }
+
+    res.json({
+      success: true,
+      data: docs,
+    });
+  } catch (err) {
+    console.error("Erro ao updated itens:", err);
+    res.status(500).json({
+      success: false,
+      error: "Item NOT updated successfully",
+      message: err.message,
+    });
+  }
+});
