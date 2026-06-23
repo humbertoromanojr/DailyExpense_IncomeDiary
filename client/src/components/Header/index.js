@@ -1,4 +1,4 @@
-import { Image, Space, Typography } from "antd";
+import { Image, Space, Typography, Badge } from "antd";
 import { MailOutlined, BellFilled } from "@ant-design/icons";
 
 export default function Header() {
@@ -10,8 +10,12 @@ export default function Header() {
       />
       <Typography.Title>Daily Expense & Income Diary</Typography.Title>
       <Space>
-        <MailOutlined style={{ fontSize: 24 }} />
-        <BellFilled style={{ fontSize: 24 }} />
+        <Badge count={15} dot>
+          <MailOutlined style={{ fontSize: 24 }} />
+        </Badge>
+        <Badge count={5}>
+          <BellFilled style={{ fontSize: 24 }} />
+        </Badge>
       </Space>
     </div>
   );
