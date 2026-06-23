@@ -10,7 +10,7 @@ export default function AppRoutes() {
     <Routes>
       <Route path="/" element={<Dashboard />} exact />
       <Route path="/addItem" element={<AddItem />} exact />
-      <Route path="/editItem:iditem" element={<EditItem />} exact />
+      <Route path="/edititem/:iditem" element={<EditItem />} exact />
       <Route path="/myList" element={<MyList />} exact />
     </Routes>
   );
