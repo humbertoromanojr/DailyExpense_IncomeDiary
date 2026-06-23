@@ -94,7 +94,7 @@ export default function AddItem() {
 
         <Form.Item label={null}>
           <Button type="primary" htmlType="submit" onClick={addNewItem}>
-            Register
+            Register item
           </Button>
         </Form.Item>
       </Form>
