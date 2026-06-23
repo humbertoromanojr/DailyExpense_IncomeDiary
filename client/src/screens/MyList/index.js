@@ -9,7 +9,7 @@ export default function MyList() {
 
   useEffect(() => {
     axios
-      .get("api/add/myList")
+      .get("api/item/myList")
       .then((res) => {
         console.log(res.data.data);
         setDataItems(res.data.data || res.data || []);

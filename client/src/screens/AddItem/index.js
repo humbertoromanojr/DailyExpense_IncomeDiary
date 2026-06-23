@@ -18,7 +18,7 @@ export default function AddItem() {
     console.log("Test Add: ", addItem);
 
     await axios
-      .post("/api/add/additem", addItem)
+      .post("/api/item/additem", addItem)
       .then((res) => {
         // clean fields
         setName("");

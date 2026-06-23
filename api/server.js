@@ -5,14 +5,14 @@ const app = express();
 const fileDB = require("./connection");
 
 // imports the Routes and Models
-const routeAdd = require("./routes/add");
+const routeItem = require("./routes/Item");
 
 // import body parser
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/api/add", routeAdd);
+app.use("/api/Item", routeItem);
 
 app.get("/", (req, res) => {
   res.end("Welcome from server Node.js");

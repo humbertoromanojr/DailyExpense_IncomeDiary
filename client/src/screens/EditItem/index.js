@@ -1,8 +1,14 @@
+import React, { useState, useEffect } from "react";
 import { Typography, Button, Checkbox, Form, Input } from "antd";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function EditItem() {
   const params = useParams();
+
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [value, setValue] = useState();
 
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -11,9 +17,21 @@ export default function EditItem() {
     console.log("Failed:", errorInfo);
   };
 
+  useEffect(() => {
+    axios
+      .post("api/item/edititem", { iditem: params.iditem })
+      .then((res) => {
+        console.log(res.data.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div>
-      <Typography.Title level={4}>Edit Expense</Typography.Title>
+      <Typography.Title level={4}>Edit items</Typography.Title>
+
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -54,7 +72,7 @@ export default function EditItem() {
 
         <Form.Item label={null}>
           <Button type="primary" htmlType="submit">
-            Register
+            Edit
           </Button>
         </Form.Item>
       </Form>
