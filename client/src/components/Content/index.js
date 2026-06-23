@@ -1,9 +1,9 @@
-import React from "react";
+import AppRoutes from "../AppRoutes";
 
 export default function Content() {
   return (
     <div className="Content">
-      <h2>Content</h2>
+      <AppRoutes />
     </div>
   );
 }
