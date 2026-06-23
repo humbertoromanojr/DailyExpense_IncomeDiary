@@ -1,6 +1,9 @@
 import { Typography, Button, Checkbox, Form, Input } from "antd";
+import { useParams } from "react-router-dom";
 
-export default function Edit() {
+export default function EditItem() {
+  const params = useParams();
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
